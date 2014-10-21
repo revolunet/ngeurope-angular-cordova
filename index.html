@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AngularJS + Cordova @ngEurope 2014</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code {
+        font-family: 'Ubuntu Mono';
+        font-size: 1.3rem;
+      }
+      .strike {
+        text-decoration: line-through;
+      }
+      .remark-slide h1 {
+        font-size: 4rem;
+      }
+      .logo img {
+        width:500px;
+      }
+      .logopt img {
+        width:100px;
+        vertical-align: middle;
+      }
+      .legendtxt {
+        line-height:60px;
+        color: #777;
+        font-size:0.8rem;
+      }
+      .footnote {
+        text-align:center !important;
+        position:absolute;
+        bottom:0;
+        left:0;
+        width:100%;
+      }
+      .author {
+        margin-top:100px;
+      }
+      a {
+        color: #0078E7;
+      }
+      .alone h1 {
+        margin-top:20%;
+        font-size:6rem;
+      }
+      .smallbg {
+        background-position: center 180px !important;
+        background-size:60% auto !important;
+      }
+      .leftimportant {
+        text-align: left !important;
+      }
+      .code1 .remark-code-line:nth-child(8) {
+        color:red;
+      }
+      .code2 .remark-code-line:nth-child(5),
+      .code2 .remark-code-line:nth-child(6),
+      .code2 .remark-code-line:nth-child(7),
+      .code2 .remark-code-line:nth-child(8) {
+        color:red;
+      }
+      .code3 .remark-code-line:nth-child(1),
+      .code3 .remark-code-line:nth-child(6),
+      .code3 .remark-code-line:nth-child(10),
+      .code3 .remark-code-line:nth-child(15) {
+        color:red;
+      }
+      .demo h1 {
+        margin-top:0;
+        margin-bottom:0;
+        font-size:6rem;
+      }
+      .opensource .opensource-list1, .opensource .opensource-list2 {
+        display:inline-block;
+        width:48%;
+      }
+      .opensource p {
+        margin:0;
+      }
+      .opensource ul {
+        margin:0;
+      }
+      .opensource li {
+        list-style-type:none;
+        text-align:left;
+      }
+      .githubpt img {
+        width:150px;
+      }
+      .finNgEurope img {
+        width:170px;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+layout: true
+class: center, top
+
+
+.footnote[
+  .logopt[![ngEurope](img/ngEurope.png)]
+  .legendtxt[ 22/10/2014, Paris]
+]
+
+---
+
+<br><br><br>
+.logo[![AngularJS](img/angularjs.png)]
+
+.logo[![Cordova](img/cordova.png)]
+
+<br><br><br>
+
+.author[Julien Bouquillon - [@revolunet](http://twitter.com/revolunet)]
+
+???
+
+Hi Developers, Contributors, **Community** !
+
+My name is Julien Bouquillon (@revolunet) and i'm the guy between you and your delicious meal from CHEF Jean-Jacques Massé :)
+
+---
+
+background-image: url(img/jjmasse.jpg)
+background-position: center center;
+
+---
+
+class: alone
+background-image: url(img/opensource.png)
+background-position: center center;
+
+
+???
+
+I'm really proud to be here and a to be part of this great, active **community** : the open web community. 
+
+And today i wanna share with you today some **insights** about mobile application development using AngularJS, Cordova, and your favorites dev tools like NodeJS, grunt & more.
+
+---
+
+background-image: url(img/mobiles-forecast.png)
+background-position: center center;
+
+???
+
+Well; As you can see here, we can expect a bit more of mobile users and devices in the next few years, and we have a **fantastic** platform to address the most of it, which is the **web platform**
+
+Devices, Browsers and **performances** are improving quickly, we now have decent webviews with great HTML5 & CSS3 capabilities.
+
+---
+class: smallbg
+background-image: url(img/phonegap-architecture.jpg)
+
+# Cordova architecture
+
+???
+
+First, just to clarify, Cordova is the **open source** core of Phonegap, and its backed by most of the tech industry giants : Adobe, Google, IBM, Mozilla, Ubuntu...
+
+**Cordova** allows you to embed your single-page web application inside a **native browser** and adds a Javascript bridge to your device native APIs, like contacts, filesystem, nfc, bluetooth, or anything your device can do, using a **single**, **cross-device**, javascript API that follow closely the W3C mobile API recommandations, which means your code is future-proof.
+
+Cordova is now a modern tool fully based on **NodeJS** and **NPM**, and it it can be easily integrated in your dev workflow (eg: grunt/gulp). And all of this makes it a very **friendly and comfortable environnement** for the web developers we are now.
+
+---
+
+class: leftimportant, top
+
+# Cordova CLI is awesome
+
+Project setup :
+
+```sh
+cordova create DemoApp
+# put your SPA in DemoApp/www
+cordova platform add android
+```
+
+Test your app (emulator or connected device) :
+
+```sh
+cordova run android
+```
+
+Add a native plugin :
+
+```sh
+cordova plugin add org.apache.cordova.contacts
+```
+
+✔ Works as NodeJS modules
+
+✔ Has a powerful hooks system
+
+???
+
+Cordova CLI is awesome
+
+Just create your project
+
+Add your SPA to the www folder
+
+Run and BOOM! you instantly have your mobile application
+
+---
+
+class: alone
+
+# Build your SPA
+
+???
+
+So now we have a nice solution to embed our webapp, how do we build the webapp itself ?
+
+---
+
+class: opensource
+
+### Open source framework for HTML5 hybrid mobile apps.
+
+![ionic](img/ionic.png)
+
+### Regular Angular + open source projects
+
+.githubpt[![](img/github.png)]
+
+.opensource-list1[
+ 
+ - ngCordova
+ - Google material design
+ - angular-gestures
+ - angular-snap
+]
+
+.opensource-list2[
+ 
+ - FastClick
+ - angular-carousel
+ - mobile-angular-ui
+ - PureCSS, TopCoat, CardinalCSS
+ ]
+
+
+
+???
+
+There are many tech choices when building a mobile web app these days
+
+So if you want an all-in-one solution to build great mobile apps, ionic framework is definitely the best tool out there.
+
+But sometimes, depending on your needs, AngularJS itself with others open sources libraries can do great things too.
+
+And luckyly, the awesome guys at **iOnic** recently released the very cool **ngCordova** project, which is a suite of open source regular angular services to use the cordova APIs.
+
+---
+
+class: leftimportant, top
+
+# Calling native API from Javascript
+
+```js
+$cordovaCalendar.createEvent({
+    title: 'Space Race',
+    location: 'The Moon',
+    notes: 'Bring sandwiches',
+    startDate: new Date(2015, 0, 6, 18, 30, 0, 0, 0),
+    endDate: new Date(2015, 1, 6, 12, 0, 0, 0, 0)
+  }).then(function (result) {
+    // success
+  }, function (err) {
+    // error
+  });
+```
+and +40 native plugins already cordova-ng-ified !
+
+???
+
+Here's an example of creating a native calendar event on the device using ngCordova.
+
+and +40 native plugins already cordova-ng-ified !
+
+(like barcode scanner, facebook, contacts, filesystem and more)
+
+**But there's more :**
+
+Thanks to ngCordova, we can now take advantage of the angular **depency injection** system to mock cordova calls during developement and for unit testing, so we can fully code and play with our work in our favorite desktop browser.
+
+---
+
+class: alone
+
+# Using contacts API
+
+???
+
+As an example, i will show you how to code a little game using the **contacts api**, and demonstrates how to mock ngCordova services at **runtime** when developing on the desktop browser.
+
+---
+
+class: leftimportant, top, code3
+
+# Fetch contacts
+
+```js
+$cordovaContacts.find({
+
+    fields: ['*'],
+    filter: 'angular'
+
+}).then(function(contacts) {
+
+  // extract contacts images and stuff
+    return contacts.map(extractContactPhoto);
+
+}).then(function(contacts) {
+
+    // arrange images in cells for the game
+    $scope.cells = createCells(contacts);
+
+});
+```
+
+???
+
+Here's how we can make a regular call to the ngCordova APIs to fetch the devive contacts.
+
+In my example i fetch all contacts related to "angular" then i use the promise to first extract contact images then arrange the data in cells for my game.
+
+---
+
+class: alone
+
+# Mock the contacts API
+
+???
+
+Now let's see how we can mock the contacts to work on the desktop browser
+
+---
+
+class: leftimportant, top, code1
+
+# Mocking data at app startup
+
+```js
+angular.module('App.mocks', ['ngCordovaMocks'])
+
+
+.run(function($http, $cordovaContacts) {
+
+    $http.get('mocks/mocks-contacts.json').then(function(response) {
+
+        $cordovaContacts.contacts = response.data;
+
+    });
+
+});
+```
+
+???
+
+The first step is to load the mocks and fake data at app startup
+
+---
+
+class: leftimportant, top, code2
+
+# Load mock module on desktop only
+
+```js
+var dependencies = [
+    'App.core'
+];
+
+if (!window.cordova) {
+    // use mocks on desktop only
+    dependencies.push('App.mocks');
+}
+
+angular.module('App', dependencies);
+```
+
+???
+
+Then we inject this mock module at runtime, only when we use a desktop browser.
+
+Your grunt or gulp task can also handle this for you.
+
+Now our app will be able to display and use contacts both in desktop browser, with the mocks, and on a device, with real contacts.
+
+We've done this for the contacts API but this could be done for any other native API your device can support.
+
+---
+class: alone, demo
+
+# Demo
+
+<iframe frameborder=0 src="http://revolunet.github.io/angular-ngcordova-demo/www/index.html" width=300 height=450></iframe>
+
+???
+
+Here's the result of my little demo using the cordova contacts API.
+
+As we're on desktop, the data comes from the mocks
+
+You can see i have some nice contacts in here :)
+
+---
+
+class: leftimportant, top
+
+# Run on your devices
+
+Run on Android
+
+```sh
+cordova run android
+```
+<br>
+Add iOS support
+
+```sh
+cordova platform add ios
+```
+<br>
+Run on iOS
+```sh
+cordova run ios
+```
+
+???
+
+It's then dead easy to have a working mobile appplication in minutes.
+
+---
+
+# Dead easy live debug
+
+![devtools](img/devtools.png)
+
+???
+
+You can use the awesome chrome ADB plugin to live inspect and debug a running app using the dev tools and the Angular Batarang extension, which is very handy.
+
+---
+
+class: Alone
+
+# hybrid web technologies
+
+<br><br>
+
+![hybrid](img/hybrid.png)
+
+
+
+???
+
+**Hybrid** web technology is a powerful combination of the **web standards** for the app frontend and all the device natives APIs your device can offer.
+
+And *Cordova* *by design* has this capability to extend the browser and use native API just when needed and it's also quite easy to create your own plugins.
+
+---
+
+template:
+
+<br>
+# THANK YOU
+
+# Et Bon Appétit :)
+
+.finNgEurope[![ngEurope](img/ngEurope-badge.png)]
+
+
+    </textarea>
+    <script src="http://gnab.github.io/remark/downloads/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+        ratio: '4:3',
+      });
+    </script>
+  </body>
+</html>
